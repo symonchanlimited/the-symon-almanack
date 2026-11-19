@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- The SYMON Almanack 網站 ・ 最新版本 ・ 第十三次更新 ・ 2026-11-19 ・ 加入「About me」個人頁（#me）；每段加連繫 CTA；文章及讀書筆記加文末連繫卡及提示彈窗（每位讀者最多兩次）；頁尾 CTA 改為邀請傾多啲 -->
+<!-- The SYMON Almanack 網站 ・ 最新版本 ・ 第十四次更新 ・ 2026-11-19 ・ 提示彈窗改為全站，每次瀏覽 20 秒、2 分鐘、5 分鐘遞減出現，撳過 LinkedIn 不再出；手機改為底部細卡；修正手機書架兩欄不等闊 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -372,7 +372,13 @@
   .nudge p.n-text{margin-top:4px;font-size:14px;line-height:1.5;color:var(--body)}
   .nudge .btn{margin-top:16px}
   .nudge .close{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;background:none;font:inherit;font-size:22px;line-height:1;color:var(--mute);cursor:pointer;border-radius:999px}
-  @media (max-width:640px){ .nudge{right:16px;bottom:16px} }
+  @media (max-width:640px){
+    .nudge{left:12px;right:12px;bottom:12px;width:auto;padding:14px 48px 14px 16px}
+    .nudge .label,.nudge p.n-text{display:none}
+    .nudge p.n-title{margin-top:0;font-size:15px;padding-right:0}
+    .nudge .btn{margin-top:10px}
+    .nudge .close{top:4px;right:4px}
+  }
   @media (prefers-reduced-motion:reduce){ .nudge{transition:none} }
   .me-intro{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
   .me-intro .ph{aspect-ratio:4/5}
@@ -412,6 +418,7 @@
   /* Typographic covers: never reproduce real cover art. */
   .shelf{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 28px}
   .book{display:block}
+  .shelf > *,.grid3 > *,.pillars > *,.sequence > *,.photo-pair > *{min-width:0}
   .cover{aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:space-between;padding:22px 20px;border-radius:var(--r-card);background:var(--ink);color:var(--white);transition:opacity .35s var(--ease)}
   .book:hover .cover{opacity:.86}
   .cover .author{font-size:13px;font-weight:500;color:var(--band-sub);line-height:1.4}
@@ -429,7 +436,7 @@
   .facts div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
   .facts dt{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-top:2px}
   .facts dd{font-size:16px;color:var(--ink)}
-  @media (max-width:640px){ .book-hero{grid-template-columns:140px 1fr;gap:20px} .facts div{grid-template-columns:1fr;gap:2px;padding:10px 0} }
+  @media (max-width:640px){ .book-hero .cover .title{font-size:16px} .book-hero{grid-template-columns:140px 1fr;gap:20px} .facts div{grid-template-columns:1fr;gap:2px;padding:10px 0} }
   .related{display:block;background:var(--white);border-radius:var(--r-card);padding:24px;transition:opacity .35s var(--ease)}
   .related:hover{opacity:.86}
   .prose .related .kicker{margin-top:12px;font-size:12px;line-height:1.4}
@@ -1069,7 +1076,7 @@
   }
   const pillar = key => { const A = AREAS[key], n = ARTICLES.filter(x => x.a === key).length;
     return `<a href="#${key}" class="pillar reveal"><p class="num">${A.n}</p><h3>${A.name}</h3><p>${A.intro}</p><div class="chips">${A.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div><p class="more">${n} pieces &rarr;</p></a>`; };
-  const book = b => `<a href="#book" class="book reveal"><div class="cover"><span class="author">${b.by}</span><span class="title">${b.t}</span></div><p class="kicker">${b.rec ? 'Recommended<span class="sep">/</span>' : ''}<span class="fmt">${b.s}</span></p><p class="verdict">${b.v}</p><p class="meta">Sample · ${b.m}</p></a>`;
+  const book = b => `<a href="#book" class="book reveal"><div class="cover"><span class="author">${b.by}</span><span class="title">${b.t}</span></div><p class="kicker">${b.rec ? 'Recommended<span class="sep">/</span><wbr>' : ''}<span class="fmt">${b.s}</span></p><p class="verdict">${b.v}</p><p class="meta">Sample · ${b.m}</p></a>`;
 
   // Homepage
   document.getElementById('homeFront').innerHTML = frontPage(ARTICLES.slice(0,6), true);
@@ -1145,9 +1152,12 @@
   }
 
   // ============ CONNECT NUDGE ============
-  // A small card that invites the reader to connect. It appears once per article, only when
-  // the reader reaches the closing section, and at most twice per reader in total.
+  // A small card that invites the reader to connect on LinkedIn. It runs on every page.
+  // Each visit: first after 20 seconds, then 2 minutes and 5 minutes after the reader closes it.
+  // Reaching the closing section of an article or book note brings the next one forward.
+  // Once the reader taps Connect on LinkedIn, it never shows again.
   const LINKEDIN = 'https://www.linkedin.com/in/symonchanchun';
+  const NUDGE_DELAYS = [20000, 120000, 300000];
   const nudgeEl = document.createElement('aside');
   nudgeEl.className = 'nudge notranslate';
   nudgeEl.setAttribute('role','dialog');
@@ -1158,25 +1168,41 @@
     <p class="n-text">If you see it differently or want to go deeper, message me.</p>
     <a href="${LINKEDIN}" class="btn">Connect on LinkedIn</a>`;
   document.body.appendChild(nudgeEl);
-  let nudgeIO, nudgeShownThisView = false;
-  const seen = () => { try { return Number(localStorage.getItem('almanackNudge') || 0); } catch (e) { return 2; } };
-  const markSeen = () => { try { localStorage.setItem('almanackNudge', String(seen() + 1)); } catch (e) {} };
-  function hideNudge(){ nudgeEl.classList.remove('show'); }
-  nudgeEl.querySelector('.close').addEventListener('click', hideNudge);
-  nudgeEl.querySelector('.btn').addEventListener('click', hideNudge);
+  const store = (area, key, val) => { try { const st = window[area]; if (val === undefined) return st.getItem(key); st.setItem(key, val); } catch (e) { return null; } };
+  let nudgeCount = Number(store('sessionStorage','almanackNudgeCount') || 0);
+  let nudgeDone = store('localStorage','almanackConnected') === '1';
+  let nudgeTimer = null, nudgeLast = 0, nudgeIO = null;
+  const nudgeLeft = () => !nudgeDone && nudgeCount < NUDGE_DELAYS.length;
+  function scheduleNudge(){
+    clearTimeout(nudgeTimer);
+    if (nudgeLeft()) nudgeTimer = setTimeout(showNudge, NUDGE_DELAYS[nudgeCount]);
+  }
+  function showNudge(){
+    if (!nudgeLeft() || nudgeEl.classList.contains('show')) return;
+    if (document.hidden) { document.addEventListener('visibilitychange', showNudge, { once:true }); return; }
+    clearTimeout(nudgeTimer);
+    nudgeCount++; nudgeLast = Date.now();
+    store('sessionStorage','almanackNudgeCount', String(nudgeCount));
+    nudgeEl.classList.add('show');
+  }
+  nudgeEl.querySelector('.close').addEventListener('click', () => { nudgeEl.classList.remove('show'); scheduleNudge(); });
+  nudgeEl.querySelector('.btn').addEventListener('click', () => {
+    nudgeDone = true; store('localStorage','almanackConnected','1');
+    clearTimeout(nudgeTimer); nudgeEl.classList.remove('show');
+  });
   function watchNudge(view){
-    hideNudge(); nudgeShownThisView = false;
     if (nudgeIO) nudgeIO.disconnect();
-    if ((view !== 'article' && view !== 'book') || seen() >= 2 || !('IntersectionObserver' in window)) return;
+    if ((view !== 'article' && view !== 'book') || !('IntersectionObserver' in window)) return;
     const point = document.querySelector(`[data-view="${view}"] .nudge-point`);
     if (!point) return;
     nudgeIO = new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting) && !nudgeShownThisView && seen() < 2) {
-        nudgeShownThisView = true; markSeen(); nudgeEl.classList.add('show'); nudgeIO.disconnect();
+      if (entries.some(e => e.isIntersecting) && (nudgeCount === 0 || Date.now() - nudgeLast > 60000)) {
+        showNudge(); nudgeIO.disconnect();
       }
     }, { threshold: 0 });
     nudgeIO.observe(point);
   }
+  scheduleNudge();
   route();
 
   // ============ 中 / EN TOGGLE ============
