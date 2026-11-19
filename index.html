@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- The SYMON Almanack 網站 ・ 最新版本 ・ 第七次更新 ・ 2026-11-18 ・ 加入 Books 讀書筆記：導覽、首頁書架、書本筆記頁範本 -->
+<!-- The SYMON Almanack 網站 ・ 最新版本 ・ 第十二次更新 ・ 2026-11-19 ・ 參考 Uber：領域入口改為灰底建議卡（文字左、插圖右）、文案縮短；插圖改為黑白灰配色 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Symon Chan — Notes on Business, Finance and Building</title>
+<title>The SYMON Almanack — Notes on Business, Finance and Building by Symon Chan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -70,7 +70,8 @@
   /* ============ NAV ============ */
   .nav{border-bottom:1px solid var(--line);background:var(--paper)}
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .wordmark{font-weight:700;font-size:18px;letter-spacing:.08em;text-transform:uppercase}
+  .wordmark{font-weight:700;font-size:18px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  @media (max-width:400px){ .wordmark{font-size:16px;letter-spacing:.06em} }
   .nav ul{display:flex;gap:28px;list-style:none}
   .nav ul a{font-size:14px;font-weight:500;color:var(--body);transition:color .3s var(--ease)}
   .nav ul a:hover{color:var(--ink)}
@@ -78,7 +79,7 @@
   .btn:active{transform:scale(.97)}
   .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
   .menu-btn{display:none;background:none;border:0;font:inherit;font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;min-height:44px;cursor:pointer}
-  @media (max-width:1020px){
+  @media (max-width:1100px){
     .nav ul,.nav .btn{display:none}
     .menu-btn{display:block}
     .nav.open ul{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:72px;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--pad) 16px;z-index:10}
@@ -87,14 +88,32 @@
   }
 
   /* ============ HERO ============ */
-  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:end}
-  .hero h1{font-size:64px;font-weight:700;line-height:1.02;letter-spacing:-.035em;text-transform:uppercase}
-  .hero p.lead{margin-top:24px;font-size:19px;font-weight:500;color:var(--body);max-width:30ch}
-  .hero .cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
-  @media (max-width:1020px){ .hero h1{font-size:48px} }
-  @media (max-width:860px){ .hero .wrap{grid-template-columns:1fr;gap:40px} .hero{padding:48px 0 40px} }
-  @media (max-width:640px){ .hero h1{font-size:36px} .hero p.lead{font-size:17px} }
+  /* Masthead: label, one-line brand statement, then the blurb and actions */
+  .hero{padding:64px 0 48px;border-bottom:1px solid var(--line)}
+  .hero h1{margin-top:16px;font-size:clamp(40px,8vw,104px);font-weight:700;line-height:.98;letter-spacing:-.04em;text-transform:uppercase}
+  .hero-sub{margin-top:36px;display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:end}
+  .hero p.lead{font-size:19px;font-weight:500;line-height:1.55;color:var(--body);max-width:54ch}
+  .hero p.lead strong{color:var(--ink);font-weight:600}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  @media (max-width:860px){ .hero{padding:48px 0 40px} .hero-sub{grid-template-columns:1fr;gap:24px;margin-top:24px} .hero .cta{justify-content:flex-start} }
+  @media (max-width:640px){ .hero p.lead{font-size:17px} }
+
+  /* Front page: one lead story, a column of headlines, then a row of cards */
+  .front{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start}
+  .lead-story .ph{margin-bottom:20px}
+  .lead-story h3{margin-top:12px;font-size:36px;font-weight:700;line-height:1.12;letter-spacing:-.025em}
+  .lead-story p.dek{margin-top:12px;font-size:17px;line-height:1.6;color:var(--body);max-width:56ch}
+  .lead-story .meta{margin-top:14px;font-size:13px;color:var(--mute)}
+  .lead-story:hover .ph{opacity:.86}
+  .lead-story .ph{transition:opacity .35s var(--ease)}
+  .headlines{border-top:2px solid var(--ink)}
+  .headline{display:block;padding:20px 0;border-bottom:1px solid var(--line);transition:opacity .35s var(--ease)}
+  .headline:hover{opacity:.7}
+  .headline h3{margin-top:8px;font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+  .headline .meta{margin-top:8px;font-size:13px;color:var(--mute)}
+  .front-more{margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}
+  @media (max-width:920px){ .front{grid-template-columns:1fr;gap:32px} .headline:last-child{border-bottom:0} }
+  @media (max-width:640px){ .lead-story h3{font-size:26px} .front-more{margin-top:40px;padding-top:32px} }
 
   /* ============ IMAGE PLACEHOLDER ============ */
   .ph{position:relative;background:var(--soft);border-radius:var(--r-card);overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -108,6 +127,7 @@
   .card h3{margin-top:10px;font-size:21px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
   .card p{margin-top:8px;font-size:15px;color:var(--body);line-height:1.55}
   .card .meta{margin-top:12px;font-size:13px;color:var(--mute)}
+  .card p.kicker,.block-head p.label{font-size:12px;line-height:1.4}
   .card.feature h3{font-size:28px;line-height:1.18}
   @media (max-width:640px){ .card.feature h3{font-size:23px} }
 
@@ -162,6 +182,7 @@
   .about{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
   .about p{font-size:18px;color:var(--body);margin-bottom:16px}
   .about p strong{color:var(--ink);font-weight:600}
+  .about p.label{font-size:12px;line-height:1.4;margin-bottom:0}
   @media (max-width:860px){ .about{grid-template-columns:1fr;gap:24px} }
 
   /* Footer */
@@ -299,6 +320,64 @@
 
   .next{border-top:1px solid var(--line);margin-top:48px;padding:56px 0 72px}
 
+  /* ============ ILLUSTRATIONS ============ */
+  /* Flat drawings in the brand's navy and greys. Placeholders until real photos replace them. */
+  .ph.illo{background:none}
+  .ph.illo svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+  /* Area doors in the masthead */
+  .doors{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .door{display:grid;grid-template-columns:1fr 88px;gap:12px;align-items:center;min-height:112px;padding:12px 12px 12px 20px;border-radius:var(--r-card);background:var(--soft);transition:background .35s var(--ease),transform .35s var(--ease)}
+  .door:hover{background:#E8E8E2}
+  .door:active{transform:scale(.97)}
+  .door .ph{width:88px;aspect-ratio:1/1}
+  .door h3{font-size:17px;font-weight:600;line-height:1.3}
+  .door p{margin-top:4px;font-size:13px;color:var(--body)}
+  @media (max-width:1020px){ .doors{grid-template-columns:1fr 1fr} }
+  .doors > *{min-width:0}
+  @media (max-width:640px){ .doors{gap:8px} .door{grid-template-columns:1fr;min-height:0;padding:10px 10px 14px} .door .ph{width:100%;aspect-ratio:2/1;order:-1} .door div{padding:0 4px} .door h3{font-size:16px} }
+
+  /* Latest: one lead story beside five headlines */
+  .front.compact{grid-template-columns:1.25fr 1fr;gap:40px}
+  .front.compact .lead-story h3{font-size:30px}
+  .front.compact .headline{padding:16px 0}
+  .front.compact .headline h3{font-size:18px}
+  @media (max-width:920px){ .front.compact{grid-template-columns:1fr} }
+  @media (max-width:640px){ .front.compact .lead-story h3{font-size:24px} }
+
+  /* About: who is writing and why */
+  .about-me{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+  .about-me .ph{aspect-ratio:4/3}
+  .about-me h2{margin-top:12px}
+  .about-me p.body{margin-top:16px;font-size:18px;line-height:1.65;color:var(--body);max-width:52ch}
+  .about-me p.body strong{color:var(--ink);font-weight:600}
+  .about-me .cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+  @media (max-width:860px){ .about-me{grid-template-columns:1fr;gap:28px} }
+  .section-cta{margin-top:28px}
+
+  /* ============ AREAS, LISTS AND CALL TO ACTION ============ */
+  a.pillar{display:block;transition:opacity .35s var(--ease)}
+  a.pillar:hover{opacity:.75}
+  .pillar .more{margin-top:18px;font-size:14px;font-weight:600;color:var(--ink)}
+  .pillars.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:640px){ .pillars.three{grid-template-columns:1fr} }
+  .ep .fmt-line{margin-top:6px;font-size:15px;color:var(--band-sub)}
+  .page-head{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+  .page-head .back{margin-bottom:16px}
+  .page-head h1{margin-top:12px;font-size:64px;font-weight:700;line-height:1;letter-spacing:-.035em}
+  .page-head p.intro{margin-top:18px;font-size:19px;font-weight:500;line-height:1.55;color:var(--body);max-width:54ch}
+  .page-head .chips{margin-top:20px}
+  .page-head .count{margin-top:16px;font-size:13px;color:var(--mute)}
+  @media (max-width:640px){ .page-head{padding:40px 0 36px} .page-head h1{font-size:40px} .page-head p.intro{font-size:17px} }
+  .cta-band{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;padding-bottom:48px;margin-bottom:40px;border-bottom:1px solid var(--band-line)}
+  .cta-band h2{margin-top:12px;font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-.025em;color:var(--white)}
+  .cta-band p.intro{margin-top:14px;font-size:16px;color:var(--band-sub);max-width:52ch}
+  .cta-band .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  .btn.light{background:var(--white);color:var(--ink)}
+  .btn.ghost-light{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1px var(--band-sub)}
+  @media (max-width:860px){ .cta-band{grid-template-columns:1fr;gap:24px} .cta-band .cta{justify-content:flex-start} }
+  @media (max-width:640px){ .cta-band h2{font-size:30px} }
+
   /* ============ BOOKS ============ */
   /* Typographic covers: never reproduce real cover art. */
   .shelf{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 28px}
@@ -345,14 +424,13 @@
 <!-- ================= NAV ================= -->
 <header class="nav notranslate" id="nav">
   <div class="wrap">
-    <a href="#home" class="wordmark" aria-label="Symon Chan, home">Symon Chan</a>
+    <a href="#home" class="wordmark" aria-label="The SYMON Almanack, home">The SYMON Almanack</a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#home">Business</a></li>
-        <li><a href="#home">Finance</a></li>
-        <li><a href="#home">Perspectives</a></li>
-        <li><a href="#home">The Path</a></li>
-        <li><a href="#home">Deep Talk</a></li>
+        <li><a href="#business">Business</a></li>
+        <li><a href="#finance">Finance</a></li>
+        <li><a href="#perspectives">Perspectives</a></li>
+        <li><a href="#the-path">The Path</a></li>
         <li><a href="#books">Books</a></li>
         <li><a href="#about">About</a></li>
       </ul>
@@ -368,119 +446,65 @@
 <!-- ================= HOME VIEW ================= -->
 <div data-view="home" class="active notranslate">
 
+  <!-- HOOK: the promise, the first action, and a door into each area -->
   <section class="hero">
     <div class="wrap">
-      <div class="reveal notranslate">
-        <p class="label">Notes on business, finance and building</p>
-        <h1 style="margin-top:16px">Learning<br>in public.</h1>
-        <p class="lead">How companies make money, how capital moves, and what I take from it.</p>
+      <div class="reveal">
+        <p class="label">The SYMON Almanack · Learning in public</p>
+        <h1>See how I think.</h1>
+      </div>
+      <div class="hero-sub reveal">
+        <p class="lead"><strong>An almanack used to be the one book you kept all year.</strong> This one is mine: every company, deal and book I study, worked through in the open.</p>
         <div class="cta">
           <a href="#latest" class="btn">Start reading</a>
-          <a href="#deeptalk" class="btn ghost">Deep Talk</a>
+          <a href="#about" class="btn ghost">Why I write</a>
         </div>
       </div>
-      <a href="#article" class="card feature reveal" aria-label="Featured: read the sample case study">
-        <div class="ph r32 notranslate"><span>Featured image</span></div>
-        <p class="kicker notranslate">Business<span class="sep">/</span><span class="fmt">Case Study</span></p>
-        <h3>How a company solves a pain point, and why customers pay for it</h3>
-        <p>Featured piece. One company, one pain point, followed from the customer problem to the profit line.</p>
-        <p class="meta notranslate">Sample · 8 min read</p>
-      </a>
+      <div class="doors" id="homeDoors"></div>
     </div>
   </section>
 
-  <!-- Pillars -->
-  <section class="block notranslate" id="topics">
-    <div class="wrap">
-      <div class="block-head reveal">
-        <div>
-          <p class="label">Four areas</p>
-          <h2 class="section-title" style="margin-top:12px">What I write about</h2>
-          <p>Each area keeps growing new branches as I learn.</p>
-        </div>
-      </div>
-      <div class="pillars">
-        <div class="pillar reveal">
-          <p class="num">01</p>
-          <h3>Business</h3>
-          <p>How companies run, which pain points they solve and where the profit comes from.</p>
-          <div class="chips"><span class="chip">Business Models</span><span class="chip">Operations</span><span class="chip">Industries</span><span class="chip">Startups</span></div>
-        </div>
-        <div class="pillar reveal">
-          <p class="num">02</p>
-          <h3>Finance</h3>
-          <p>How the industry works, from asset management to deals and capital markets.</p>
-          <div class="chips"><span class="chip">Asset Management</span><span class="chip">Deals &amp; M&amp;A</span><span class="chip">Banking</span><span class="chip">Markets</span></div>
-        </div>
-        <div class="pillar reveal">
-          <p class="num">03</p>
-          <h3>Perspectives</h3>
-          <p>Views on mindset, habits and the way I think about growth.</p>
-          <div class="chips"><span class="chip">Mindset</span><span class="chip">Habits</span><span class="chip">Views</span></div>
-        </div>
-        <div class="pillar reveal">
-          <p class="num">04</p>
-          <h3>The Path</h3>
-          <p>My own road in investing and business: what I tried and the rules I rewrote.</p>
-          <div class="chips"><span class="chip">Investing Journal</span><span class="chip">Ventures</span><span class="chip">Money Rules</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Latest -->
+  <!-- PROOF: the six newest pieces, like a front page -->
   <section class="block" id="latest">
     <div class="wrap">
-      <div class="block-head reveal notranslate">
+      <div class="block-head reveal">
         <div>
           <p class="label">Latest</p>
           <h2 class="section-title" style="margin-top:12px">Recent writing</h2>
         </div>
-        <a href="#article" class="link-arrow">View all writing &rarr;</a>
+        <a href="#writing" class="link-arrow">View all writing &rarr;</a>
       </div>
-      <div class="grid3">
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">Finance<span class="sep">/</span><span class="fmt">Explainer</span></p>
-          <h3>How an asset manager actually makes money</h3>
-          <p>Fees, scale and distribution, explained from the ground up.</p>
-          <p class="meta notranslate">Draft title · 7 min read</p>
-        </a>
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">Finance<span class="sep">/</span><span class="fmt">Case Study</span></p>
-          <h3>Why a listed company chooses to leave the stock market</h3>
-          <p>Privatisation in Hong Kong: who pays, who decides and what shareholders get.</p>
-          <p class="meta notranslate">Draft title · 9 min read</p>
-        </a>
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">Business<span class="sep">/</span><span class="fmt">Explainer</span></p>
-          <h3>Mainland China and Hong Kong e-commerce: where the gap comes from</h3>
-          <p>Starting from a hunch and testing it against the numbers.</p>
-          <p class="meta notranslate">Draft title · 8 min read</p>
-        </a>
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">The Path<span class="sep">/</span><span class="fmt">Case Study</span></p>
-          <h3>The investing rules I rewrote this year</h3>
-          <p>What changed in my process, and why the old rules failed.</p>
-          <p class="meta notranslate">Draft title · 6 min read</p>
-        </a>
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">Perspectives<span class="sep">/</span><span class="fmt">Explainer</span></p>
-          <h3>Busy is not the same as productive</h3>
-          <p>A short note on measuring a day by what it produces.</p>
-          <p class="meta notranslate">Draft title · 4 min read</p>
-        </a>
-        <a href="#article" class="card reveal">
-          <div class="ph r32 notranslate"><span>Image</span></div>
-          <p class="kicker notranslate">Finance<span class="sep">/</span><span class="fmt">Case Study</span></p>
-          <h3>Buying a company with borrowed money: the leveraged buyout</h3>
-          <p>One famous deal, one concept, every number traced.</p>
-          <p class="meta notranslate">Draft title · 10 min read</p>
-        </a>
+      <div id="homeFront"></div>
+    </div>
+  </section>
+
+  <!-- PERSONALITY: what I actually think -->
+  <section class="band" id="views">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="label">Perspectives</p>
+        <h2 class="section-title">What I actually think.</h2>
+        <p class="intro">Opinions on work, money and life, often written as a conversation.</p>
+      </div>
+      <div class="episodes" id="homeViews"></div>
+      <a href="#perspectives" class="btn">All perspectives</a>
+    </div>
+  </section>
+
+  <!-- ABOUT: who is writing, and why -->
+  <section class="block" id="about">
+    <div class="wrap about-me">
+      <div class="ph illo reveal" id="aboutIllo"></div>
+      <div class="reveal">
+        <p class="label">About</p>
+        <h2 class="section-title">Why I write in public</h2>
+        <p class="body"><strong>Reading alone changes nothing.</strong> Writing makes me finish the thought. Publishing lets you tell me where I'm wrong.</p>
+        <p class="body">I'm Symon Chan, based in Hong Kong.</p>
+        <p class="disclaimer" style="margin-top:16px">Placeholder text. Replace with your own words.</p>
+        <div class="cta">
+          <a href="https://www.linkedin.com/in/symonchanchun" class="btn">Connect on LinkedIn</a>
+          <a href="#the-path" class="btn ghost">Read The Path</a>
+        </div>
       </div>
     </div>
   </section>
@@ -490,8 +514,9 @@
     <div class="wrap">
       <div class="block-head reveal">
         <div>
-          <p class="label">Formats</p>
-          <h2 class="section-title" style="margin-top:12px">Three ways I write</h2>
+          <p class="label">How I write</p>
+          <h2 class="section-title" style="margin-top:12px">How I write</h2>
+          <p>Every piece names its format under the title.</p>
         </div>
       </div>
       <div class="formats reveal">
@@ -508,90 +533,22 @@
           <p>A podcast-style conversation that thinks a question through out loud.</p>
         </div>
       </div>
+      <a href="#article" class="link-arrow section-cta reveal">See an example &rarr;</a>
     </div>
   </section>
 
-  <!-- Deep Talk band -->
-  <section class="band" id="deeptalk">
-    <div class="wrap">
-      <div class="reveal notranslate">
-        <p class="label">Deep Talk</p>
-        <h2 class="section-title">Thinking it through, out loud.</h2>
-        <p class="intro">Long-form conversations written like a podcast transcript. One question per episode, followed until it gets interesting.</p>
-      </div>
-      <div class="episodes">
-        <a href="#article" class="ep reveal">
-          <span class="no notranslate">EP 01</span>
-          <div><h3>Should you start a business or get the job first?</h3><p class="notranslate">Draft episode</p></div>
-          <span class="len notranslate">12 min</span>
-        </a>
-        <a href="#article" class="ep reveal">
-          <span class="no notranslate">EP 02</span>
-          <div><h3>What the wealthy seem to understand about luck</h3><p class="notranslate">Draft episode</p></div>
-          <span class="len notranslate">10 min</span>
-        </a>
-        <a href="#article" class="ep reveal">
-          <span class="no notranslate">EP 03</span>
-          <div><h3>Owning a business versus owning a job</h3><p class="notranslate">Draft episode</p></div>
-          <span class="len notranslate">14 min</span>
-        </a>
-      </div>
-      <a href="#article" class="btn notranslate">All episodes</a>
-    </div>
-  </section>
-
-  <!-- Books -->
-  <section class="block" id="books">
+  <!-- READING: what I'm reading now -->
+  <section class="block" id="bookshelf">
     <div class="wrap">
       <div class="block-head reveal">
         <div>
           <p class="label">Books</p>
           <h2 class="section-title" style="margin-top:12px">What I'm reading</h2>
-          <p>A short note on every book I read: what it says, and what I actually use from it.</p>
+          <p>What each book says, and what I actually use.</p>
         </div>
-        <a href="#book" class="link-arrow">All books &rarr;</a>
+        <a href="#books" class="link-arrow">All books &rarr;</a>
       </div>
-      <div class="shelf">
-        <a href="#book" class="book reveal">
-          <div class="cover"><span class="author">Chris Voss</span><span class="title">Never Split the Difference</span></div>
-          <p class="kicker">Recommended<span class="sep">/</span><span class="fmt">Finished</span></p>
-          <p class="verdict">Negotiation is listening, not arguing.</p>
-          <p class="meta">Sample · Nov 2026</p>
-        </a>
-        <a href="#book" class="book reveal">
-          <div class="cover"><span class="author">Eliyahu M. Goldratt</span><span class="title">The Goal</span></div>
-          <p class="kicker"><span class="fmt">Finished</span></p>
-          <p class="verdict">Find the bottleneck before fixing anything else.</p>
-          <p class="meta">Sample · Oct 2026</p>
-        </a>
-        <a href="#book" class="book reveal">
-          <div class="cover"><span class="author">David Allen</span><span class="title">Getting Things Done</span></div>
-          <p class="kicker"><span class="fmt">Reading</span></p>
-          <p class="verdict">Get every task out of your head and into a system.</p>
-          <p class="meta">Sample · In progress</p>
-        </a>
-        <a href="#book" class="book reveal">
-          <div class="cover"><span class="author">Ryan Serhant</span><span class="title">Brand It Like Serhant</span></div>
-          <p class="kicker"><span class="fmt">Reading</span></p>
-          <p class="verdict">How a personal brand earns trust before it sells.</p>
-          <p class="meta">Sample · In progress</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="block notranslate" id="about">
-    <div class="wrap about">
-      <div class="reveal">
-        <p class="label">About</p>
-        <h2 class="section-title" style="margin-top:12px">Why this exists</h2>
-      </div>
-      <div class="reveal">
-        <p><strong>I write down what I learn so it compounds.</strong> Every piece here starts as my own notes and conversations, then gets shaped into something clear enough for someone else to read.</p>
-        <p>The focus is simple: how businesses work, how capital moves, and how a person builds ownership over time.</p>
-        <p class="disclaimer" style="margin-top:24px">Placeholder text. Replace with your own words.</p>
-      </div>
+      <div class="shelf" id="homeShelf"></div>
     </div>
   </section>
 </div>
@@ -603,7 +560,7 @@
       <div class="wrap">
         <div class="inner">
           <div class="article-top">
-            <a href="#home" class="back">&larr; All writing</a>
+            <a href="#writing" class="back">&larr; All writing</a>
             <div class="lang" role="group" aria-label="Article body language">
               <button type="button" data-lang="zh" aria-pressed="true" lang="zh-Hant-HK">中</button>
               <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -872,33 +829,163 @@
     </section>
   </article>
 </div>
+<!-- ================= LIST VIEW: AREA PAGES AND ALL WRITING (rendered from ARTICLES) ================= -->
+<div data-view="list" class="notranslate">
+  <header class="page-head">
+    <div class="wrap">
+      <a href="#home" class="back">&larr; Home</a>
+      <p class="label" id="listLabel">Area</p>
+      <h1 id="listTitle">Area</h1>
+      <p class="intro" id="listIntro"></p>
+      <div class="chips" id="listChips"></div>
+      <p class="count" id="listCount"></p>
+    </div>
+  </header>
+  <section class="block">
+    <div class="wrap" id="listBody"></div>
+  </section>
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head"><div><p class="label">Keep exploring</p><h2 class="section-title" style="margin-top:12px">Other areas</h2></div></div>
+      <div class="pillars three" id="listOthers"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= BOOKS PAGE (rendered from BOOKS) ================= -->
+<div data-view="books" class="notranslate">
+  <header class="page-head">
+    <div class="wrap">
+      <a href="#home" class="back">&larr; Home</a>
+      <p class="label">Books</p>
+      <h1>What I'm reading</h1>
+      <p class="intro">Every book I read, finished or not: what it says, and what I actually use.</p>
+    </div>
+  </header>
+  <section class="block">
+    <div class="wrap"><div class="shelf" id="booksAll"></div></div>
+  </section>
+</div>
 </main>
 
 <!-- ================= FOOTER ================= -->
 <footer class="notranslate">
   <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <p class="label" style="color:var(--band-sub)">Think with me</p>
+        <h2>Disagree with something? Tell me.</h2>
+        <p class="intro">Suggest a company, a deal or a book, or tell me where I'm wrong.</p>
+      </div>
+      <div class="cta">
+        <a href="https://www.linkedin.com/in/symonchanchun" class="btn light">Connect on LinkedIn</a>
+        <a href="#latest" class="btn ghost-light">Read the latest</a>
+      </div>
+    </div>
     <div class="top">
-      <a href="#home" class="wordmark">Symon Chan</a>
+      <a href="#home" class="wordmark">The SYMON Almanack</a>
       <ul>
-        <li><a href="#topics">Business</a></li>
-        <li><a href="#topics">Finance</a></li>
-        <li><a href="#topics">Perspectives</a></li>
-        <li><a href="#topics">The Path</a></li>
-        <li><a href="#deeptalk">Deep Talk</a></li>
+        <li><a href="#business">Business</a></li>
+        <li><a href="#finance">Finance</a></li>
+        <li><a href="#perspectives">Perspectives</a></li>
+        <li><a href="#the-path">The Path</a></li>
         <li><a href="#books">Books</a></li>
         <li><a href="https://www.linkedin.com/in/symonchanchun">LinkedIn</a></li>
       </ul>
     </div>
-    <p class="fine">&copy; 2026 Symon Chan. Personal learning notes on business and finance. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
+    <p class="fine">&copy; 2026 Symon Chan. The SYMON Almanack: personal learning notes on business and finance. Nothing here is investment advice or a recommendation to buy or sell any security.</p>
   </div>
 </footer>
 
 <script>
-  // View switching: #article and #book show their templates; any other hash shows home.
+  // ============ CONTENT ============
+  // One list of articles and one list of books. Newest first. The homepage, area pages
+  // and "All writing" are all built from these lists, so publishing means adding one line here.
+  const AREAS = {
+    'business':     { n:'01', name:'Business', intro:'How companies run, and where the profit comes from.', chips:['Business Models','Operations','Industries','Startups'] },
+    'finance':      { n:'02', name:'Finance', intro:'How money is managed, raised and moved.', chips:['Asset Management','Deals &amp; M&amp;A','Banking','Markets'] },
+    'perspectives': { n:'03', name:'Perspectives', intro:'What I actually think about work, money and life.', chips:['Mindset','Habits','Work','Money'] },
+    'the-path':     { n:'04', name:'The Path', intro:'My own road in investing and business, and the rules I rewrote.', chips:['Investing Journal','Ventures','Money Rules'] }
+  };
+  const ARTICLES = [
+    { a:'business',     f:'Case Study', t:'How a company solves a pain point, and why customers pay for it', d:'One company, one pain point, followed from the customer problem to the profit line.', date:'18 Nov 2026', min:8 },
+    { a:'finance',      f:'Explainer',  t:'How an asset manager actually makes money', d:'Fees, scale and distribution, explained from the ground up.', date:'16 Nov 2026', min:7 },
+    { a:'perspectives', f:'Deep Talk',  t:'Should you start a business or get the job first?', d:'A conversation about timing, risk and what each path actually teaches you.', date:'14 Nov 2026', min:12 },
+    { a:'finance',      f:'Case Study', t:'Why a listed company chooses to leave the stock market', d:'Privatisation in Hong Kong: who pays, who decides and what shareholders get.', date:'12 Nov 2026', min:9 },
+    { a:'business',     f:'Explainer',  t:'Mainland China and Hong Kong e-commerce: where the gap comes from', d:'Starting from a hunch and testing it against the numbers.', date:'10 Nov 2026', min:8 },
+    { a:'the-path',     f:'Case Study', t:'The investing rules I rewrote this year', d:'What changed in my process, and why the old rules failed.', date:'8 Nov 2026', min:6 },
+    { a:'perspectives', f:'Explainer',  t:'Busy is not the same as productive', d:'A short note on measuring a day by what it produces.', date:'6 Nov 2026', min:4 },
+    { a:'finance',      f:'Case Study', t:'Buying a company with borrowed money: the leveraged buyout', d:'One famous deal, one concept, every number traced.', date:'4 Nov 2026', min:10 },
+    { a:'perspectives', f:'Deep Talk',  t:'What the wealthy seem to understand about luck', d:'Where luck ends, where preparation starts, and why the line matters.', date:'2 Nov 2026', min:10 },
+    { a:'business',     f:'Explainer',  t:'Reading any business model in five questions', d:'Who pays, for what, how often, at what cost, and what stops a rival.', date:'31 Oct 2026', min:7 },
+    { a:'finance',      f:'Explainer',  t:'How a company goes public in Hong Kong', d:'From appointing a sponsor to the first day of trading, step by step.', date:'29 Oct 2026', min:9 },
+    { a:'perspectives', f:'Deep Talk',  t:'Owning a business versus owning a job', d:'Two kinds of income, two kinds of freedom, and the trade-off between them.', date:'27 Oct 2026', min:14 },
+    { a:'the-path',     f:'Explainer',  t:'Why I started writing in public', d:'What changes when you have to explain an idea to someone else.', date:'25 Oct 2026', min:5 },
+    { a:'the-path',     f:'Case Study', t:'What building a small business taught me first', d:'The lessons that only showed up once real customers were paying.', date:'23 Oct 2026', min:8 }
+  ];
+  const BOOKS = [
+    { t:'Never Split the Difference', by:'Chris Voss', s:'Finished', rec:true, v:'Negotiation is listening, not arguing.', m:'Nov 2026' },
+    { t:'The Goal', by:'Eliyahu M. Goldratt', s:'Finished', rec:false, v:'Find the bottleneck before fixing anything else.', m:'Oct 2026' },
+    { t:'Getting Things Done', by:'David Allen', s:'Reading', rec:false, v:'Get every task out of your head and into a system.', m:'In progress' },
+    { t:'Brand It Like Serhant', by:'Ryan Serhant', s:'Reading', rec:false, v:'How a personal brand earns trust before it sells.', m:'In progress' }
+  ];
+
+  // Flat illustrations, one per area, used as placeholder images until real photos are added.
+  const ILLO = {"business": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><rect width=\"400\" height=\"300\" fill=\"#1E1E1C\"/>\n<rect x=\"56\" y=\"232\" width=\"288\" height=\"8\" rx=\"4\" fill=\"#5E5E59\"/>\n<rect x=\"72\" y=\"116\" width=\"150\" height=\"116\" rx=\"8\" fill=\"#FFFFFF\"/>\n<rect x=\"62\" y=\"88\" width=\"34\" height=\"32\" rx=\"6\" fill=\"#B8B8B2\"/><rect x=\"96\" y=\"88\" width=\"34\" height=\"32\" fill=\"#FFFFFF\"/><rect x=\"130\" y=\"88\" width=\"34\" height=\"32\" fill=\"#B8B8B2\"/><rect x=\"164\" y=\"88\" width=\"34\" height=\"32\" fill=\"#FFFFFF\"/><rect x=\"198\" y=\"88\" width=\"34\" height=\"32\" rx=\"6\" fill=\"#B8B8B2\"/>\n<rect x=\"88\" y=\"140\" width=\"38\" height=\"30\" rx=\"4\" fill=\"#E2E2DD\"/><rect x=\"168\" y=\"140\" width=\"38\" height=\"30\" rx=\"4\" fill=\"#E2E2DD\"/>\n<rect x=\"130\" y=\"172\" width=\"34\" height=\"60\" rx=\"4\" fill=\"#1E1E1C\"/><circle cx=\"156\" cy=\"204\" r=\"3\" fill=\"#FFFFFF\"/>\n<path d=\"M236 112 C276 84 312 96 318 150\" fill=\"none\" stroke=\"#B8B8B2\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M306 140 l12 14 l10 -16\" fill=\"none\" stroke=\"#B8B8B2\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n<rect x=\"282\" y=\"212\" width=\"66\" height=\"18\" rx=\"9\" fill=\"#FFFFFF\"/><rect x=\"282\" y=\"194\" width=\"66\" height=\"18\" rx=\"9\" fill=\"#E2E2DD\"/><rect x=\"282\" y=\"176\" width=\"66\" height=\"18\" rx=\"9\" fill=\"#FFFFFF\"/>\n<circle cx=\"315\" cy=\"185\" r=\"4\" fill=\"#141414\"/></svg>", "finance": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><rect width=\"400\" height=\"300\" fill=\"#E6E5DF\"/>\n<rect x=\"56\" y=\"236\" width=\"288\" height=\"8\" rx=\"4\" fill=\"#C9C9C3\"/>\n<rect x=\"62\" y=\"66\" width=\"190\" height=\"160\" rx=\"10\" fill=\"#FFFFFF\"/>\n<rect x=\"84\" y=\"196\" width=\"146\" height=\"4\" rx=\"2\" fill=\"#E2E2DD\"/>\n<rect x=\"90\" y=\"164\" width=\"24\" height=\"32\" rx=\"4\" fill=\"#C9C9C3\"/><rect x=\"124\" y=\"146\" width=\"24\" height=\"50\" rx=\"4\" fill=\"#B8B8B2\"/><rect x=\"158\" y=\"124\" width=\"24\" height=\"72\" rx=\"4\" fill=\"#6E6E6A\"/><rect x=\"192\" y=\"94\" width=\"24\" height=\"102\" rx=\"4\" fill=\"#141414\"/>\n<path d=\"M92 150 L136 128 L170 110 L208 80\" fill=\"none\" stroke=\"#141414\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"1 9\"/>\n<path d=\"M266 128 L308 98 L350 128 Z\" fill=\"#141414\"/><rect x=\"270\" y=\"128\" width=\"76\" height=\"8\" rx=\"2\" fill=\"#141414\"/>\n<rect x=\"276\" y=\"140\" width=\"12\" height=\"80\" rx=\"3\" fill=\"#6E6E6A\"/><rect x=\"302\" y=\"140\" width=\"12\" height=\"80\" rx=\"3\" fill=\"#6E6E6A\"/><rect x=\"328\" y=\"140\" width=\"12\" height=\"80\" rx=\"3\" fill=\"#6E6E6A\"/>\n<rect x=\"264\" y=\"220\" width=\"88\" height=\"12\" rx=\"3\" fill=\"#141414\"/></svg>", "perspectives": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><rect width=\"400\" height=\"300\" fill=\"#ECEAE5\"/>\n<rect x=\"104\" y=\"72\" width=\"92\" height=\"44\" rx=\"14\" fill=\"#FFFFFF\"/><path d=\"M128 116 l-6 16 l20 -16 z\" fill=\"#FFFFFF\"/>\n<circle cx=\"132\" cy=\"94\" r=\"5\" fill=\"#141414\"/><circle cx=\"150\" cy=\"94\" r=\"5\" fill=\"#141414\"/><circle cx=\"168\" cy=\"94\" r=\"5\" fill=\"#141414\"/>\n<rect x=\"212\" y=\"90\" width=\"96\" height=\"44\" rx=\"14\" fill=\"#141414\"/><path d=\"M280 134 l8 16 l-22 -16 z\" fill=\"#141414\"/>\n<rect x=\"228\" y=\"104\" width=\"62\" height=\"6\" rx=\"3\" fill=\"#FFFFFF\"/><rect x=\"228\" y=\"118\" width=\"40\" height=\"6\" rx=\"3\" fill=\"#B8B8B2\"/>\n<circle cx=\"134\" cy=\"170\" r=\"26\" fill=\"#F2C9A0\"/><path d=\"M86 244 a48 48 0 0 1 96 0 z\" fill=\"#141414\"/>\n<circle cx=\"270\" cy=\"176\" r=\"26\" fill=\"#8A5A3B\"/><path d=\"M222 244 a48 48 0 0 1 96 0 z\" fill=\"#6E6E6A\"/>\n<rect x=\"56\" y=\"242\" width=\"288\" height=\"8\" rx=\"4\" fill=\"#C9C9C3\"/></svg>", "the-path": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><rect width=\"400\" height=\"300\" fill=\"#1E1E1C\"/>\n<path d=\"M70 252 C120 230 230 236 220 190 C210 148 120 160 140 120 C156 92 240 96 286 92\" fill=\"none\" stroke=\"#3A3A37\" stroke-width=\"30\" stroke-linecap=\"round\"/>\n<path d=\"M70 252 C120 230 230 236 220 190 C210 148 120 160 140 120 C156 92 240 96 286 92\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-dasharray=\"10 12\"/>\n<circle cx=\"214\" cy=\"214\" r=\"9\" fill=\"#FFFFFF\"/><circle cx=\"160\" cy=\"150\" r=\"9\" fill=\"#FFFFFF\"/>\n<rect x=\"296\" y=\"56\" width=\"5\" height=\"44\" rx=\"2.5\" fill=\"#FFFFFF\"/><path d=\"M301 58 L340 70 L301 82 Z\" fill=\"#B8B8B2\"/>\n<circle cx=\"298\" cy=\"100\" r=\"9\" fill=\"#FFFFFF\"/></svg>", "writing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><rect width=\"400\" height=\"300\" fill=\"#F0F0EB\"/>\n<rect x=\"160\" y=\"112\" width=\"120\" height=\"78\" rx=\"8\" fill=\"#141414\"/><rect x=\"176\" y=\"130\" width=\"64\" height=\"6\" rx=\"3\" fill=\"#FFFFFF\"/><rect x=\"176\" y=\"146\" width=\"88\" height=\"6\" rx=\"3\" fill=\"#B8B8B2\"/><rect x=\"176\" y=\"162\" width=\"52\" height=\"6\" rx=\"3\" fill=\"#B8B8B2\"/>\n<rect x=\"146\" y=\"190\" width=\"148\" height=\"9\" rx=\"4.5\" fill=\"#5E5E59\"/>\n<rect x=\"302\" y=\"170\" width=\"44\" height=\"28\" rx=\"4\" fill=\"#FFFFFF\"/><rect x=\"310\" y=\"180\" width=\"28\" height=\"4\" rx=\"2\" fill=\"#C9C9C3\"/><rect x=\"310\" y=\"188\" width=\"18\" height=\"4\" rx=\"2\" fill=\"#C9C9C3\"/>\n<rect x=\"52\" y=\"200\" width=\"300\" height=\"10\" rx=\"5\" fill=\"#141414\"/><rect x=\"72\" y=\"210\" width=\"10\" height=\"34\" rx=\"3\" fill=\"#141414\"/><rect x=\"320\" y=\"210\" width=\"10\" height=\"34\" rx=\"3\" fill=\"#141414\"/>\n<circle cx=\"106\" cy=\"128\" r=\"22\" fill=\"#E0AC7E\"/><path d=\"M64 200 a42 42 0 0 1 84 0 z\" fill=\"#6E6E6A\"/><path d=\"M128 170 L162 186\" stroke=\"#E8B98C\" stroke-width=\"10\" stroke-linecap=\"round\"/></svg>"};
+  const pic = (key, ratio) => `<div class="ph illo ${ratio}">${ILLO[key] || ''}</div>`;
+  // An article can name its own drawing with img:'key'; otherwise it uses its area's drawing.
+
+  const kicker = x => `<p class="kicker">${AREAS[x.a].name}<span class="sep">/</span><span class="fmt">${x.f}</span></p>`;
+  const meta = x => `<p class="meta">Sample · ${x.date} · ${x.min} min read</p>`;
+  const card = x => `<a href="#article" class="card reveal">${pic(x.img || x.a,'r32')}${kicker(x)}<h3>${x.t}</h3><p>${x.d}</p>${meta(x)}</a>`;
+  function frontPage(list, compact){
+    if (!list.length) return '';
+    const n = compact ? 5 : 3;
+    const [lead, ...rest] = list, heads = rest.slice(0,n), more = compact ? [] : rest.slice(n);
+    return `<div class="front${compact ? ' compact' : ''}">
+        <a href="#article" class="lead-story reveal">${pic(lead.img || lead.a,'r169')}${kicker(lead)}<h3>${lead.t}</h3><p class="dek">${lead.d}</p>${meta(lead)}</a>
+        ${heads.length ? `<div class="headlines reveal">${heads.map(x => `<a href="#article" class="headline">${kicker(x)}<h3>${x.t}</h3>${meta(x)}</a>`).join('')}</div>` : ''}
+      </div>
+      ${more.length ? `<div class="grid3 front-more">${more.map(card).join('')}</div>` : ''}`;
+  }
+  const pillar = key => { const A = AREAS[key], n = ARTICLES.filter(x => x.a === key).length;
+    return `<a href="#${key}" class="pillar reveal"><p class="num">${A.n}</p><h3>${A.name}</h3><p>${A.intro}</p><div class="chips">${A.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div><p class="more">${n} pieces &rarr;</p></a>`; };
+  const book = b => `<a href="#book" class="book reveal"><div class="cover"><span class="author">${b.by}</span><span class="title">${b.t}</span></div><p class="kicker">${b.rec ? 'Recommended<span class="sep">/</span>' : ''}<span class="fmt">${b.s}</span></p><p class="verdict">${b.v}</p><p class="meta">Sample · ${b.m}</p></a>`;
+
+  // Homepage
+  document.getElementById('homeFront').innerHTML = frontPage(ARTICLES.slice(0,6), true);
+  document.getElementById('homeDoors').innerHTML = Object.keys(AREAS).map(k => {
+    const n = ARTICLES.filter(x => x.a === k).length;
+    return `<a href="#${k}" class="door reveal"><div><h3>${AREAS[k].name}</h3><p>${n} pieces &rarr;</p></div>${pic(k,'')}</a>`; }).join('');
+  document.getElementById('aboutIllo').innerHTML = ILLO.writing;
+  document.getElementById('homeViews').innerHTML = ARTICLES.filter(x => x.a === 'perspectives').slice(0,3).map((x,i) =>
+    `<a href="#article" class="ep reveal"><span class="no">${String(i+1).padStart(2,'0')}</span><div><h3>${x.t}</h3><p class="fmt-line">${x.f} · ${x.date}</p></div><span class="len">${x.min} min</span></a>`).join('');
+  document.getElementById('homeShelf').innerHTML = BOOKS.slice(0,4).map(book).join('');
+  document.getElementById('booksAll').innerHTML = BOOKS.map(book).join('');
+
+  // Area pages and "All writing"
+  function renderList(key){
+    const all = key === 'writing';
+    const list = all ? ARTICLES : ARTICLES.filter(x => x.a === key);
+    const A = all ? { n:'', name:'All writing', intro:'Everything, newest first.', chips:[] } : AREAS[key];
+    document.getElementById('listLabel').textContent = all ? 'The SYMON Almanack' : 'Area ' + A.n;
+    document.getElementById('listTitle').textContent = A.name;
+    document.getElementById('listIntro').textContent = A.intro;
+    document.getElementById('listChips').innerHTML = A.chips.map(c => `<span class="chip">${c}</span>`).join('');
+    document.getElementById('listCount').textContent = list.length + ' pieces';
+    document.getElementById('listBody').innerHTML = frontPage(list);
+    document.getElementById('listOthers').innerHTML = Object.keys(AREAS).filter(k => k !== key).slice(0,3).map(pillar).join('');
+  }
+
+  // ============ ROUTER ============
+  // #article and #book open the templates; #books opens the bookshelf; an area key or #writing
+  // opens a list page; any other hash scrolls the homepage to that section.
   const views = document.querySelectorAll('[data-view]');
   function route(){
     const h = location.hash.replace('#','');
-    const target = (h === 'article' || h === 'book') ? h : 'home';
+    let target = 'home';
+    if (h === 'article' || h === 'book' || h === 'books') target = h;
+    else if (AREAS[h] || h === 'writing') { target = 'list'; renderList(h); }
     views.forEach(v => v.classList.toggle('active', v.dataset.view === target));
     if (target !== 'home') { window.scrollTo(0,0); }
     else if (h && h !== 'home') { const el = document.getElementById(h); if (el) el.scrollIntoView(); }
